@@ -25,21 +25,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/krasimir/webpack-library-starter.git"
+    "url": "https://github.com/bonustrack/kbyte.git"
   },
   "keywords": [
-    "webpack",
-    "es6",
-    "starter",
-    "library",
-    "universal",
-    "umd",
-    "commonjs"
+    "kbyte",
+    "byteball"
   ],
   "author": "Krasimir Tsonev",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/krasimir/webpack-library-starter/issues"
+    "url": "https://github.com/bonustrack/kbyte/issues"
   },
-  "homepage": "https://github.com/krasimir/webpack-library-starter"
+  "homepage": "https://github.com/bonustrack/kbyte",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "byteballcore": "^0.2.60",
+    "ws": "^2.3.1"
+  }
 }
