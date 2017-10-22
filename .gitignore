@@ -5,9 +5,3 @@ package-lock.json
 # Remove some common IDE working directories
 .idea
 .vscode
-.gitignore
-README.md
-dist/
-package.json
-rollup.config.js
-test/
