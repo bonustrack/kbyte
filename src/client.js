@@ -1,6 +1,7 @@
 import objectHash from 'byteballcore/object_hash';
 import constants from 'byteballcore/constants';
 import objectLength from 'byteballcore/object_length';
+
 import Promise from 'bluebird';
 
 let WebSocket;
@@ -21,7 +22,7 @@ const wait = (ws, cb) => {
 };
 
 export default class Client {
-  constructor (address) {
+  constructor(address) {
     this.address = address;
     this.open = false;
     this.queue = {};
@@ -37,7 +38,6 @@ export default class Client {
 
     this.ws.addEventListener('open', () => {
       this.open = true;
-
     });
 
     this.ws.addEventListener('close', () => {
@@ -45,7 +45,7 @@ export default class Client {
     });
   }
 
-  send (command, params, cb) {
+  send(command, params, cb) {
     const request = { command };
     if (params) request.params = params;
     request.tag = objectHash.getBase64Hash(request);
@@ -57,7 +57,7 @@ export default class Client {
     });
   };
 
-  async compose (fromAddress, app, payload, privKeys, cb) {
+  async compose(fromAddress, app, payload, privKeys, cb) {
     const witnesses = await this.send('get_witnesses', null);
     const parents = await this.send('light/get_parents_and_last_ball_and_witness_list_unit', { witnesses });
 

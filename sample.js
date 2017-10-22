@@ -1,4 +1,4 @@
-var kbyte = require('./lib/kbyte.min');
+var kbyte = require('./dist/kbyte.min');
 
 const client = new kbyte.Client('wss://byteball.org/bb-test');
 

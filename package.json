@@ -1,45 +1,31 @@
 {
   "name": "kbyte",
   "version": "0.0.1",
-  "description": "Produce universal library with webpack and es6",
-  "main": "lib/kbyte.js",
-  "scripts": {
-    "build": "webpack --env build",
-    "dev": "webpack --progress --colors --watch --env dev",
-    "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
-    "test:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js"
-  },
-  "devDependencies": {
-    "babel-cli": "6.24.1",
-    "babel-core": "6.24.1",
-    "babel-eslint": "7.2.3",
-    "babel-loader": "7.0.0",
-    "babel-plugin-add-module-exports": "0.2.1",
-    "babel-preset-es2015": "6.24.1",
-    "chai": "3.5.0",
-    "eslint": "3.19.0",
-    "eslint-loader": "1.7.1",
-    "mocha": "3.3.0",
-    "webpack": "3.1.0",
-    "yargs": "7.1.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bonustrack/kbyte.git"
-  },
-  "keywords": [
-    "kbyte",
-    "byteball"
-  ],
-  "author": "Krasimir Tsonev",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bonustrack/kbyte/issues"
-  },
-  "homepage": "https://github.com/bonustrack/kbyte",
+  "main": "dist/kbyte.cjs.js",
+  "module": "dist/kbyte.esm.js",
+  "browser": "dist/kbyte.min.js",
   "dependencies": {
     "bluebird": "^3.5.1",
     "byteballcore": "^0.2.60",
-    "ws": "^2.3.1"
-  }
+    "ws": "^3.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "rollup": "^0.46.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1",
+    "uglify-es": "^3.1.5"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/test.js",
+    "pretest": "npm run build"
+  },
+  "files": [
+    "dist"
+  ]
 }
