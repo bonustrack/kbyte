@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-es';
 import builtins from 'rollup-plugin-node-builtins';
+import filesize from 'rollup-plugin-filesize';
 import json from 'rollup-plugin-json';
 import pkg from './package.json';
 
@@ -20,6 +21,7 @@ export default [
       uglify({}, minify),
       builtins(),
       json(),
+      filesize(),
     ],
   },
 

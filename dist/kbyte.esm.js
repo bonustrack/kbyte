@@ -33,7 +33,7 @@ class Client {
       if (this.queue[message[1].tag]) {
         this.queue[message[1].tag](null, message[1].response);
       } else {
-        console.log(message);
+        // console.log(message);
       }
     });
 
