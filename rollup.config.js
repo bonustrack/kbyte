@@ -12,7 +12,7 @@ export default [
     entry: 'src/main.js',
     dest: pkg.browser,
     format: 'umd',
-    moduleName: 'kbyte',
+    moduleName: pkg.name,
     external: ['crypto', 'util'],
     plugins: [
       resolve(), // so Rollup can find `ms`
