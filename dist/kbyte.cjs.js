@@ -4,14 +4,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+var util = require('util');
 var objectHash = _interopDefault(require('byteballcore/object_hash'));
 var constants = _interopDefault(require('byteballcore/constants'));
 var objectLength = _interopDefault(require('byteballcore/object_length'));
-var Promise = _interopDefault(require('bluebird'));
-var crypto = _interopDefault(require('crypto'));
-var Mnemonic = _interopDefault(require('bitcore-mnemonic'));
-var Bitcore = _interopDefault(require('bitcore-lib'));
-var validationUtils = _interopDefault(require('byteballcore/validation_utils'));
 
 let WebSocket;
 if (typeof window !== 'undefined') {
@@ -113,58 +109,7 @@ class Client {
   };
 }
 
-Client.prototype.send = Promise.promisify(Client.prototype.send);
-Client.prototype.compose = Promise.promisify(Client.prototype.compose);
-
-/**
- * Generate Private Account
- * @returns {{address: *, pub_key, priv_key: string, mnemonic_phrase: *}}
- */
-const genPrivAccount = () => {
-  const passphrase = 'passphrase';
-
-  const deviceTempPrivKey = crypto.randomBytes(32);
-  const devicePrevTempPrivKey = crypto.randomBytes(32);
-
-  let mnemonic = new Mnemonic();
-  while (!Mnemonic.isValid(mnemonic.toString()))
-    mnemonic = new Mnemonic();
-
-  const keys = {
-    mnemonic_phrase: mnemonic.phrase,
-    temp_priv_key: deviceTempPrivKey.toString('base64'),
-    prev_temp_priv_key: devicePrevTempPrivKey.toString('base64')
-  };
-
-  const xPrivKey = mnemonic.toHDPrivateKey(passphrase);
-  const devicePrivKey = xPrivKey.derive("m/1'").privateKey.bn.toBuffer({ size: 32 });
-  const strXPubKey = Bitcore.HDPublicKey(xPrivKey.derive("m/44'/0'/0'")).toString();
-
-  const wallet = crypto.createHash('sha256').update(strXPubKey, 'utf8').digest('base64');
-
-  function derivePubkey(xPubKey, path){
-    const hdPubKey = new Bitcore.HDPublicKey(xPubKey);
-    return hdPubKey.derive(path).publicKey.toBuffer().toString('base64');
-  }
-
-  const isChange = 0;
-  const addressIndex = 1;
-  const pubkey = derivePubkey(strXPubKey, `m/${isChange}/${addressIndex}`);
-  const address = objectHash.getChash160(['sig', { pubkey }]);
-
-  return {
-    address,
-    pub_key: pubkey,
-    priv_key: devicePrivKey.toString('base64'),
-    mnemonic_phrase: keys.mnemonic_phrase,
-  };
-};
-
-var unsafe = {
-  genPrivAccount,
-  isValidAddress: validationUtils.isValidAddress,
-  isValidDeviceAddress: validationUtils.isValidDeviceAddress,
-};
+Client.prototype.send = util.promisify(Client.prototype.send);
+Client.prototype.compose = util.promisify(Client.prototype.compose);
 
 exports.Client = Client;
-exports.unsafe = unsafe;

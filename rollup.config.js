@@ -13,7 +13,7 @@ export default [
     dest: pkg.browser,
     format: 'umd',
     moduleName: 'kbyte',
-    external: ['crypto'],
+    external: ['crypto', 'util'],
     plugins: [
       resolve(), // so Rollup can find `ms`
       commonjs(), // so Rollup can convert `ms` to an ES module

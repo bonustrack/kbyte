@@ -1,8 +1,7 @@
+import { promisify } from 'util';
 import objectHash from 'byteballcore/object_hash';
 import constants from 'byteballcore/constants';
 import objectLength from 'byteballcore/object_length';
-
-import Promise from 'bluebird';
 
 let WebSocket;
 if (typeof window !== 'undefined') {
@@ -104,5 +103,5 @@ export default class Client {
   };
 }
 
-Client.prototype.send = Promise.promisify(Client.prototype.send);
-Client.prototype.compose = Promise.promisify(Client.prototype.compose);
+Client.prototype.send = promisify(Client.prototype.send);
+Client.prototype.compose = promisify(Client.prototype.compose);
