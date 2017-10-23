@@ -1,6 +1,6 @@
 # kbyte
 
-A lightweight Javascript library for Byteball
+A lightweight JavaScript library for Byteball
 
 ### Install
 ```
