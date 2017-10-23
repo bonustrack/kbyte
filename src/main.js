@@ -1,2 +1,7 @@
-import Client from './client.js';
-export { Client };
+import Client from './client';
+import unsafe from './unsafe';
+
+export {
+  Client,
+  unsafe,
+};

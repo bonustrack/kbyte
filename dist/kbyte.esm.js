@@ -2,6 +2,10 @@ import objectHash from 'byteballcore/object_hash';
 import constants from 'byteballcore/constants';
 import objectLength from 'byteballcore/object_length';
 import Promise from 'bluebird';
+import crypto from 'crypto';
+import Mnemonic from 'bitcore-mnemonic';
+import Bitcore from 'bitcore-lib';
+import validationUtils from 'byteballcore/validation_utils';
 
 let WebSocket;
 if (typeof window !== 'undefined') {
@@ -32,6 +36,8 @@ class Client {
       const message = JSON.parse(data.data);
       if (this.queue[message[1].tag]) {
         this.queue[message[1].tag](null, message[1].response);
+      } else {
+        console.log(message);
       }
     });
 
@@ -104,4 +110,54 @@ class Client {
 Client.prototype.send = Promise.promisify(Client.prototype.send);
 Client.prototype.compose = Promise.promisify(Client.prototype.compose);
 
-export { Client };
+/**
+ * Generate Private Account
+ * @returns {{address: *, pub_key, priv_key: string, mnemonic_phrase: *}}
+ */
+const genPrivAccount = () => {
+  const passphrase = 'passphrase';
+
+  const deviceTempPrivKey = crypto.randomBytes(32);
+  const devicePrevTempPrivKey = crypto.randomBytes(32);
+
+  let mnemonic = new Mnemonic();
+  while (!Mnemonic.isValid(mnemonic.toString()))
+    mnemonic = new Mnemonic();
+
+  const keys = {
+    mnemonic_phrase: mnemonic.phrase,
+    temp_priv_key: deviceTempPrivKey.toString('base64'),
+    prev_temp_priv_key: devicePrevTempPrivKey.toString('base64')
+  };
+
+  const xPrivKey = mnemonic.toHDPrivateKey(passphrase);
+  const devicePrivKey = xPrivKey.derive("m/1'").privateKey.bn.toBuffer({ size: 32 });
+  const strXPubKey = Bitcore.HDPublicKey(xPrivKey.derive("m/44'/0'/0'")).toString();
+
+  const wallet = crypto.createHash('sha256').update(strXPubKey, 'utf8').digest('base64');
+
+  function derivePubkey(xPubKey, path){
+    const hdPubKey = new Bitcore.HDPublicKey(xPubKey);
+    return hdPubKey.derive(path).publicKey.toBuffer().toString('base64');
+  }
+
+  const isChange = 0;
+  const addressIndex = 1;
+  const pubkey = derivePubkey(strXPubKey, `m/${isChange}/${addressIndex}`);
+  const address = objectHash.getChash160(['sig', { pubkey }]);
+
+  return {
+    address,
+    pub_key: pubkey,
+    priv_key: devicePrivKey.toString('base64'),
+    mnemonic_phrase: keys.mnemonic_phrase,
+  };
+};
+
+var unsafe = {
+  genPrivAccount,
+  isValidAddress: validationUtils.isValidAddress,
+  isValidDeviceAddress: validationUtils.isValidDeviceAddress,
+};
+
+export { Client, unsafe };

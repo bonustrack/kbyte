@@ -5,6 +5,8 @@
   "module": "dist/kbyte.esm.js",
   "browser": "dist/kbyte.min.js",
   "dependencies": {
+    "bitcore-lib": "^0.14.0",
+    "bitcore-mnemonic": "^1.2.5",
     "bluebird": "^3.5.1",
     "byteballcore": "^0.2.60",
     "ws": "^3.2.0"
@@ -15,6 +17,8 @@
     "eslint-plugin-import": "^2.8.0",
     "rollup": "^0.46.0",
     "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^2.0.1",
     "uglify-es": "^3.1.5"

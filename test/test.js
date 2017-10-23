@@ -21,13 +21,17 @@ const test = async () => {
   /** Get History */
   const history = await client.send('light/get_history', {
     witnesses,
-    requested_joints: [parents.last_stable_mc_ball_unit]
+    requested_joints: [parents.last_stable_mc_ball_unit],
   });
   console.log('History', history);
 
   /** Get Joint */
   const joint = await client.send('get_joint', parents.last_stable_mc_ball_unit);
   console.log('Joint', joint);
+
+  /** Get Bots */
+  const bots = await client.send('hub/get_bots', null);
+  console.log('Bots', bots);
 };
 
 test();
