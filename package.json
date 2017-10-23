@@ -1,6 +1,7 @@
 {
   "name": "kbyte",
   "version": "0.0.1",
+  "description": "A lightweight Javascript library for Byteball",
   "main": "dist/kbyte.cjs.js",
   "module": "dist/kbyte.esm.js",
   "browser": "dist/kbyte.min.js",
@@ -29,5 +30,12 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "repository": "bonustrack/kbyte",
+  "author": "Bonustrack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bonustrack/kbyte/issues"
+  },
+  "homepage": "https://github.com/bonustrack/kbyte"
 }
