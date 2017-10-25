@@ -2,21 +2,16 @@ const kbyte = require('.');
 
 const client = new kbyte.Client('wss://byteball.org/bb');
 
-client.send(
-  'get_witnesses',
-  null,
-  (err, result) => {
-    console.log(err, result);
-  },
-);
+const test = async () => {
+  const witnesses = await client.send('get_witnesses', null);
+  console.log('Witnesses', witnesses);
 
-client.send(
-  'subscribe',
-  {
-    subscription_id: '1',
-    last_mci: 1273070,
-  },
-  (err, result) => {
-    console.log(err, result);
-  },
-);
+  const catchup = await client.send('catchup', {
+    last_stable_mci: 1294024,
+    last_known_mci: 1294064,
+    witnesses,
+  });
+  console.log(catchup);
+};
+
+test();
