@@ -44,6 +44,14 @@ const test = async () => {
     last_mci: mci,
   });
 
+  /** Catchup */
+  const catchup = await client.send('catchup', {
+    last_stable_mci: mci - 10,
+    last_known_mci: mci,
+    witnesses,
+  });
+  console.log('Catchup', catchup);
+
   /** Get hash tree */
   const hashTree = await client.send('get_hash_tree', {
     from_ball: joint.joint.unit.last_ball,
