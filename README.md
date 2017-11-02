@@ -1,7 +1,7 @@
 [![npm](https://img.shields.io/npm/v/kbyte.svg)](https://www.npmjs.com/package/kbyte)
 [![Try kbyte on RunKit](https://badge.runkitcdn.com/kbyte.svg)](https://runkit.com/bonustrack/kbyte)
 
-# kbyte
+# kbyte.js
 
 A lightweight JavaScript library for Byteball
 
