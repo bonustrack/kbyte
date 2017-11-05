@@ -25,6 +25,7 @@ export default class Client {
     this.address = address;
     this.open = false;
     this.queue = {};
+    this.notifications = () => {};
 
     this.ws = new WebSocket(address);
 
@@ -33,7 +34,7 @@ export default class Client {
       if (this.queue[message[1].tag]) {
         this.queue[message[1].tag](null, message[1].response);
       } else {
-        // console.log(message);
+        this.notifications(null, message);
       }
     });
 
@@ -46,6 +47,10 @@ export default class Client {
     });
   }
 
+  subscribe(cb) {
+    this.notifications = cb;
+  }
+
   send(command, params, cb) {
     const request = { command };
     if (params) request.params = params;
@@ -56,7 +61,7 @@ export default class Client {
     wait(this.ws, () => {
       this.ws.send(message);
     });
-  };
+  }
 
   async compose(fromAddress, app, payload, privKeys, cb) {
     const witnesses = await this.send('get_witnesses', null);
@@ -100,7 +105,7 @@ export default class Client {
       console.log(e);
       return e;
     }
-  };
+  }
 }
 
 Client.prototype.send = promisify(Client.prototype.send);

@@ -39,10 +39,11 @@ const test = async () => {
   console.log('Last MCI', mci);
 
   /** Subscribe */
-  await client.send('subscribe', {
+  const subscribe = await client.send('subscribe', {
     subscription_id: '1',
     last_mci: mci,
   });
+  console.log('Subscribe', subscribe);
 
   /** Catchup */
   const catchup = await client.send('catchup', {
@@ -58,6 +59,11 @@ const test = async () => {
     to_ball: parents.last_stable_mc_ball,
   });
   console.log('Hash tree', hashTree);
+
+  /** Subscribe to WebSocket notifications */
+  client.subscribe((err, result) => {
+    console.log('Subscribe', err, result);
+  });
 };
 
 test();
