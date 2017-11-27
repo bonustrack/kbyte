@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>kbyte</title>
+  <script src="../dist/kbyte.min.js"></script>
 </head>
 <body>
+
+<script>
+  // Init WebSocket client
+  const client = new kbyte.Client('wss://byteball.org/bb');
+
+  // Get peers
+  client.send('get_peers', null, (err, result) => {
+    console.log(err, result);
+  });
+</script>
 
 <!--
 Genesis: oj8yEksX9Ubq7lLc+p6F2uyHUuynugeVq4+ikT67X6E=
