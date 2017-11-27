@@ -4,7 +4,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var util = require('util');
 var objectHash = _interopDefault(require('byteballcore/object_hash'));
 var constants = _interopDefault(require('byteballcore/constants'));
 var objectLength = _interopDefault(require('byteballcore/object_length'));
@@ -113,8 +112,5 @@ class Client {
     }
   }
 }
-
-Client.prototype.send = util.promisify(Client.prototype.send);
-Client.prototype.compose = util.promisify(Client.prototype.compose);
 
 exports.Client = Client;

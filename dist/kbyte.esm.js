@@ -1,4 +1,3 @@
-import { promisify } from 'util';
 import objectHash from 'byteballcore/object_hash';
 import constants from 'byteballcore/constants';
 import objectLength from 'byteballcore/object_length';
@@ -107,8 +106,5 @@ class Client {
     }
   }
 }
-
-Client.prototype.send = promisify(Client.prototype.send);
-Client.prototype.compose = promisify(Client.prototype.compose);
 
 export { Client };

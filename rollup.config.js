@@ -14,7 +14,6 @@ export default [
     dest: pkg.browser,
     format: 'umd',
     moduleName: pkg.name,
-    external: ['crypto', 'util'],
     plugins: [
       resolve(), // so Rollup can find `ms`
       commonjs(), // so Rollup can convert `ms` to an ES module
@@ -36,7 +35,6 @@ export default [
       'crypto',
       'bitcore-mnemonic',
       'bitcore-lib',
-      'bluebird',
       'byteballcore/constants',
       'byteballcore/object_hash',
       'byteballcore/object_length',
