@@ -1,4 +1,4 @@
-import objectHash from 'byteballcore/object_hash';
+// import objectHash from 'byteballcore/object_hash';
 
 let WebSocket;
 if (typeof window !== 'undefined') {
@@ -51,7 +51,8 @@ export default class Client {
   send(command, params, cb) {
     const request = { command };
     if (params) request.params = params;
-    request.tag = objectHash.getBase64Hash(request);
+    // request.tag = objectHash.getBase64Hash(request);
+    request.tag = Math.random().toString(36).substring(7);
     this.queue[request.tag] = cb;
     const message = JSON.stringify(['request', request]);
 
