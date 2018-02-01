@@ -19,7 +19,7 @@ var kbyte = require('kbyte');
 var client = new kbyte.Client('wss://byteball.org/bb');
 
 // Get peers
-client.send('get_peers', null, function(err, result) {
+client.request('get_peers', null, function(err, result) {
   console.log(err, result);
 });
 ```
@@ -35,13 +35,13 @@ var kbyte = require('kbyte');
 bluebird.promisifyAll(kbyte.Client.prototype);
 ```
 
-It'll add a *Async* to all kbyte functions (e.g. return client.sendAsync().then())
-client.send('get_peers', null, function(err, result) {
+It'll add a *Async* to all kbyte functions (e.g. return client.requestAsync().then())
+client.request('get_peers', null, function(err, result) {
   console.log(err, result);
 });
 ```js
-// So instead of writing client.send('get_peers', null, cb); you have to write:
-return client.sendAsync('get_peers', null).then(function(result) {
+// So instead of writing client.request('get_peers', null, cb); you have to write:
+return client.requestAsync('get_peers', null).then(function(result) {
   console.log(result); // => ['wss://byteroll.com/bb', 'wss://byteball.fr/bb' ...]
 });
 ```

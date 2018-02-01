@@ -12,7 +12,7 @@
   const client = new kbyte.Client('wss://byteball.org/bb');
 
   // Get peers
-  client.send('get_peers', null, (err, result) => {
+  client.request('get_peers', null, (err, result) => {
     console.log(err, result);
   });
 </script>

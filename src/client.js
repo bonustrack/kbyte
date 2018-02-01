@@ -48,16 +48,24 @@ export default class Client {
     this.notifications = cb;
   }
 
-  send(command, params, cb) {
+  send(message) {
+    wait(this.ws, () => {
+      this.ws.send(JSON.stringify(message));
+    });
+  }
+
+  request(command, params, cb) {
     const request = { command };
     if (params) request.params = params;
     // request.tag = objectHash.getBase64Hash(request);
     request.tag = Math.random().toString(36).substring(7);
     this.queue[request.tag] = cb;
-    const message = JSON.stringify(['request', request]);
+    this.send(['request', request]);
+  }
 
-    wait(this.ws, () => {
-      this.ws.send(message);
-    });
+  justsaying(subject, body) {
+    const justsaying = { subject };
+    if (body) justsaying.body = body;
+    this.send(['justsaying', justsaying]);
   }
 }

@@ -7,21 +7,21 @@ const client = new kbyte.Client('wss://byteball.org/bb');
 
 const test = async () => {
   /** Get witnesses */
-  const witnesses = await client.sendAsync('get_witnesses', null);
+  const witnesses = await client.requestAsync('get_witnesses', null);
   console.log('Witnesses', witnesses);
 
   /** Get parents */
-  const parents = await client.sendAsync('light/get_parents_and_last_ball_and_witness_list_unit', {
+  const parents = await client.requestAsync('light/get_parents_and_last_ball_and_witness_list_unit', {
     witnesses,
   });
   console.log('Parents', parents);
 
   /** Get peers */
-  const peers = await client.sendAsync('get_peers', null);
+  const peers = await client.requestAsync('get_peers', null);
   console.log('Peers', peers);
 
   /** Get history */
-  const history = await client.sendAsync('light/get_history', {
+  const history = await client.requestAsync('light/get_history', {
     witnesses,
     requested_joints: [parents.last_stable_mc_ball_unit],
     // addresses: [],
@@ -29,26 +29,26 @@ const test = async () => {
   console.log('History', history);
 
   /** Get joint */
-  const joint = await client.sendAsync('get_joint', parents.last_stable_mc_ball_unit);
+  const joint = await client.requestAsync('get_joint', parents.last_stable_mc_ball_unit);
   console.log('Joint', joint);
 
   /** Get bots */
-  const bots = await client.sendAsync('hub/get_bots', null);
+  const bots = await client.requestAsync('hub/get_bots', null);
   console.log('Bots', bots);
 
   /** Get last MCI */
-  const mci = await client.sendAsync('get_last_mci', null);
+  const mci = await client.requestAsync('get_last_mci', null);
   console.log('Last MCI', mci);
 
   /** Subscribe */
-  const subscribe = await client.sendAsync('subscribe', {
+  const subscribe = await client.requestAsync('subscribe', {
     subscription_id: '1',
     last_mci: mci,
   });
   console.log('Subscribe', subscribe);
 
   /** Catchup */
-  const catchup = await client.sendAsync('catchup', {
+  const catchup = await client.requestAsync('catchup', {
     last_stable_mci: mci - 10,
     last_known_mci: mci,
     witnesses,
@@ -56,7 +56,7 @@ const test = async () => {
   console.log('Catchup', catchup);
 
   /** Get hash tree */
-  const hashTree = await client.sendAsync('get_hash_tree', {
+  const hashTree = await client.requestAsync('get_hash_tree', {
     from_ball: joint.joint.unit.last_ball,
     to_ball: parents.last_stable_mc_ball,
   });
@@ -66,6 +66,9 @@ const test = async () => {
   client.subscribe((err, result) => {
     console.log('Subscribe', err, result);
   });
+
+  /** New address to watch */
+  client.justsaying('light/new_address_to_watch', 'BVVJ2K7ENPZZ3VYZFWQWK7ISPCATFIW3');
 };
 
 test();
