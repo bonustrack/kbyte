@@ -12,7 +12,7 @@ export default [
   {
     entry: 'src/main.js',
     dest: pkg.browser,
-    format: 'umd',
+    format: 'umd', // iife
     moduleName: pkg.name,
     plugins: [
       resolve(), // so Rollup can find `ms`
