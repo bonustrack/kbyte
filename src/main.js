@@ -1,7 +1,7 @@
 import Client from './client';
-// import unsafe from './unsafe';
+// import utils from './utils';
 
 export {
   Client,
-  // unsafe,
+  // utils,
 };
