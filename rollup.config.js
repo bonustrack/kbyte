@@ -10,13 +10,15 @@ import pkg from './package.json';
 export default [
   // browser-friendly UMD build
   {
-    entry: 'src/main.js',
-    dest: pkg.browser,
-    format: 'umd', // iife
-    moduleName: pkg.name,
+    input: 'src/main.js',
+    output: {
+      name: pkg.name,
+      file: pkg.browser,
+      format: 'umd', // 'iife'
+    },
     plugins: [
-      resolve(), // so Rollup can find `ms`
-      commonjs(), // so Rollup can convert `ms` to an ES module
+      resolve(),
+      commonjs(),
       uglify({}, minify),
       builtins(),
       json(),
@@ -30,19 +32,18 @@ export default [
   // builds from a single configuration where possible, using
   // the `targets` option which can specify `dest` and `format`)
   {
-    entry: 'src/main.js',
+    input: 'src/main.js',
     external: [
       'crypto',
       'bitcore-mnemonic',
-      'bitcore-lib',
       'byteballcore/constants',
       'byteballcore/object_hash',
       'byteballcore/object_length',
       'byteballcore/validation_utils',
     ],
-    targets: [
-      { dest: pkg.main, format: 'cjs' },
-      { dest: pkg.module, format: 'es' },
+    output: [
+      { file: pkg.main, format: 'cjs' },
+      { file: pkg.module, format: 'es' },
     ],
   },
 ];
