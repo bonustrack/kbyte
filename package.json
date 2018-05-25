@@ -31,7 +31,8 @@
     "pretest": "npm run build"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "repository": "bonustrack/kbyte",
   "author": "Bonustrack",
