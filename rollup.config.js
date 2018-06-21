@@ -46,4 +46,18 @@ export default [
       { file: pkg.module, format: 'es' },
     ],
   },
+  {
+    input: 'src/utils.js',
+    external: [
+      'crypto',
+      'bitcore-mnemonic',
+      'byteballcore/constants',
+      'byteballcore/object_hash',
+      'byteballcore/object_length',
+      'byteballcore/validation_utils',
+    ],
+    output: [
+      { file: 'dist/utils.js', format: 'cjs' },
+    ],
+  },
 ];

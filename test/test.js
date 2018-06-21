@@ -1,5 +1,6 @@
 // const assert = require('assert');
 const kbyte = require('..');
+const utils = require('../dist/utils');
 const bluebird = require('bluebird');
 
 bluebird.promisifyAll(kbyte.Client.prototype);
@@ -62,6 +63,18 @@ const test = async () => {
   });
   console.log('Hash tree', hashTree);
 
+  /** Get attestation */
+  const attestation = await client.requestAsync('light/get_attestation', {
+    attestor_address: 'H5EZTQE7ABFH27AUDTQFMZIALANK6RBG',
+    field: 'email',
+    value: 'fabien@bonustrack.co',
+  });
+  console.log('Attestation', attestation);
+
+  /** Get asset metadata */
+  const assetMetadata = await client.requestAsync('hub/get_asset_metadata', '1OLPCz72F1rJ7IGtmEMuV1LvfLawT9WGOFuHugW2b7c=');
+  console.log('Asset metadata', assetMetadata);
+
   /** Subscribe to WebSocket notifications */
   client.subscribe((err, result) => {
     console.log('Subscribe', err, result);
@@ -69,6 +82,14 @@ const test = async () => {
 
   /** New address to watch */
   client.justsaying('light/new_address_to_watch', 'BVVJ2K7ENPZZ3VYZFWQWK7ISPCATFIW3');
+
+  /** Generate random seed */
+  const randomSeed = utils.generateRandomSeed();
+  console.log('Random seed', randomSeed);
+
+  /** Is seed valid? */
+  const seedValid = utils.isSeedValid(randomSeed);
+  console.log('Seed valid', seedValid);
 };
 
 test();
