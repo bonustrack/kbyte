@@ -29,7 +29,9 @@ class Client {
     this.ws.addEventListener('message', (data) => {
       const message = JSON.parse(data.data);
       if (this.queue[message[1].tag]) {
-        this.queue[message[1].tag](null, message[1].response);
+        const error = message[1].response.error || null;
+        const result = error ? null : message[1].response;
+        this.queue[message[1].tag](error, result);
       } else {
         this.notifications(null, message);
       }
