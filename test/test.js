@@ -71,6 +71,16 @@ const test = async () => {
   });
   console.log('Attestation', attestation);
 
+  /** Pick divisible coins for amount */
+  const inputs = await client.requestAsync('light/pick_divisible_coins_for_amount', {
+    asset: 'xamdfH5Uk+alv3le0pEA01qSsfZjycyMsqaqHtycJ1M=',
+    addresses: ['ULQA63NGEZACP4N7ZMBUBISH6ZTCUS2Q'],
+    last_ball_mci: 1000000000,
+    amount: 10000,
+    spend_unconfirmed: 'own',
+  });
+  console.log('Inputs', inputs);
+
   /** Get asset metadata */
   const assetMetadata = await client.requestAsync('hub/get_asset_metadata', '1OLPCz72F1rJ7IGtmEMuV1LvfLawT9WGOFuHugW2b7c=');
   console.log('Asset metadata', assetMetadata);
