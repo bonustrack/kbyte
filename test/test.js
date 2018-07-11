@@ -71,6 +71,12 @@ const test = async () => {
   });
   console.log('Attestation', attestation);
 
+  /** Get attestations */
+  const attestations = await client.requestAsync('light/get_attestations', {
+    address: 'ULQA63NGEZACP4N7ZMBUBISH6ZTCUS2Q',
+  });
+  console.log('Attestations', attestations);
+
   /** Pick divisible coins for amount */
   const inputs = await client.requestAsync('light/pick_divisible_coins_for_amount', {
     asset: 'xamdfH5Uk+alv3le0pEA01qSsfZjycyMsqaqHtycJ1M=',
