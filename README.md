@@ -7,8 +7,18 @@
 A lightweight JavaScript library for Byteball
 
 ### Install
+kbyte was designed to work both in the browser and in Node.js.
+
+#### Node.js
+To install kbyte on Node.js, open your terminal and run:
 ```
 npm install kbyte --save
+```
+
+#### Browser
+You can create an index.html file and include kbyte with:
+```html
+<script src="https://cdn.jsdelivr.net/npm/kbyte"></script>
 ```
 
 ### Usage

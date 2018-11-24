@@ -1,6 +1,5 @@
 // const assert = require('assert');
 const kbyte = require('..');
-const utils = require('../dist/utils');
 const bluebird = require('bluebird');
 
 bluebird.promisifyAll(kbyte.Client.prototype);
@@ -98,14 +97,6 @@ const test = async () => {
 
   /** New address to watch */
   client.justsaying('light/new_address_to_watch', 'BVVJ2K7ENPZZ3VYZFWQWK7ISPCATFIW3');
-
-  /** Generate random seed */
-  const randomSeed = utils.generateRandomSeed();
-  console.log('Random seed', randomSeed);
-
-  /** Is seed valid? */
-  const seedValid = utils.isSeedValid(randomSeed);
-  console.log('Seed valid', seedValid);
 };
 
 test();
