@@ -1,6 +1,6 @@
 {
   "name": "kbyte",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A lightweight JavaScript library for Byteball",
   "main": "dist/kbyte.cjs.js",
   "module": "dist/kbyte.esm.js",
