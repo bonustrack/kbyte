@@ -1,5 +1,4 @@
 [![npm](https://img.shields.io/npm/v/kbyte.svg)](https://www.npmjs.com/package/kbyte)
-![](http://img.badgesize.io/bonustrack/kbyte/master/dist/kbyte.min.js.svg)
 [![Try kbyte on RunKit](https://badge.runkitcdn.com/kbyte.svg)](https://runkit.com/bonustrack/kbyte)
 
 # kbyte.js
