@@ -8,13 +8,14 @@
 <body>
 
 <script>
-  // Init WebSocket client
-  const client = new kbyte.Client('wss://byteball.org/bb');
+// Init WebSocket client
+const client = new kbyte.Client('wss://obyte.org/bb');
 
-  // Get peers
-  client.request('get_peers', null, (err, result) => {
-    console.log(err, result);
-  });
+// Get witnesses
+client.request('get_witnesses', null, (err, result) => {
+  console.log(err, result);
+  alert(JSON.stringify(result, null, 2));
+});
 </script>
 
 </body>

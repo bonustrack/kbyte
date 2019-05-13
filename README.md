@@ -3,7 +3,7 @@
 
 # kbyte.js
 
-A lightweight JavaScript library for Byteball
+A lightweight JavaScript library for Obyte
 
 ### Install
 kbyte was designed to work both in the browser and in Node.js.
@@ -25,7 +25,7 @@ You can create an index.html file and include kbyte with:
 var kbyte = require('kbyte');
 
 // Init WebSocket client
-var client = new kbyte.Client('wss://byteball.org/bb');
+var client = new kbyte.Client('wss://obyte.org/bb');
 
 // Get peers
 client.request('get_peers', null, function(err, result) {
