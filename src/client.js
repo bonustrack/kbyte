@@ -1,11 +1,4 @@
-// import objectHash from 'byteballcore/object_hash';
-
-let WebSocket;
-if (typeof window !== 'undefined') {
-  WebSocket = window.WebSocket;
-} else {
-  WebSocket = require('ws');
-}
+import WebSocket from 'ws';
 
 const wait = (ws, cb) => {
   setTimeout(() => {

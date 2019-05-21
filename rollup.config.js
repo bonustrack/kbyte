@@ -4,30 +4,28 @@ import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';
 
 export default [
-  // browser-friendly UMD build
   {
     input: 'src/main.js',
     output: {
       name: pkg.name,
       file: pkg.browser,
-      format: 'umd', // 'iife'
+      format: 'iife', // 'umd'
+      globals: {
+        ws: 'WebSocket',
+      },
     },
     plugins: [
       uglify({}, minify),
       filesize(),
     ],
+    external: ['ws'],
   },
-
-  // CommonJS (for Node) and ES module (for bundlers) build.
-  // (We could have three entries in the configuration array
-  // instead of two, but it's quicker to generate multiple
-  // builds from a single configuration where possible, using
-  // the `targets` option which can specify `dest` and `format`)
   {
     input: 'src/main.js',
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' },
     ],
+    external: ['ws'],
   },
 ];
