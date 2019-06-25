@@ -11,9 +11,6 @@ export default [
       name: pkg.name,
       file: pkg.browser,
       format: 'umd', // 'iife'
-      globals: {
-        ws: 'WebSocket',
-      },
     },
     plugins: [
       uglify({}, minify),
