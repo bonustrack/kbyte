@@ -50,7 +50,7 @@ client.request('get_peers', null, function(err, result) {
 });
 ```js
 // So instead of writing client.request('get_peers', null, cb); you have to write:
-return client.requestAsync('get_peers', null).then(function(result) {
+client.requestAsync('get_peers', null).then(function(result) {
   console.log(result); // => ['wss://byteroll.com/bb', 'wss://byteball.fr/bb' ...]
 });
 ```

@@ -1,4 +1,4 @@
-import uglify from 'rollup-plugin-uglify';
+import { uglify } from 'rollup-plugin-uglify';
 import { minify } from 'uglify-es';
 import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';

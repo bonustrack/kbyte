@@ -44,6 +44,7 @@ const test = async () => {
   const subscribe = await client.requestAsync('subscribe', {
     subscription_id: '1',
     last_mci: mci,
+    library_version: '0.2.95',
   });
   console.log('Subscribe', subscribe);
 

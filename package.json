@@ -6,16 +6,16 @@
   "module": "dist/kbyte.esm.js",
   "browser": "dist/kbyte.min.js",
   "dependencies": {
-    "ws": "^6.1.2"
+    "ws": "^7.0.1"
   },
   "devDependencies": {
-    "bluebird": "^3.5.3",
-    "eslint": "^5.9.0",
+    "bluebird": "^3.5.5",
+    "eslint": "^6.0.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "rollup": "^0.67.3",
-    "rollup-plugin-filesize": "^5.0.1",
-    "rollup-plugin-uglify": "^3.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "rollup": "^1.16.2",
+    "rollup-plugin-filesize": "^6.1.1",
+    "rollup-plugin-uglify": "^4.0.0",
     "uglify-es": "^3.3.9"
   },
   "scripts": {
