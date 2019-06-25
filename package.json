@@ -15,7 +15,7 @@
     "eslint-plugin-import": "^2.18.0",
     "rollup": "^1.16.2",
     "rollup-plugin-filesize": "^6.1.1",
-    "rollup-plugin-uglify": "^3.0.0",
+    "rollup-plugin-uglify": "^4.0.0",
     "uglify-es": "^3.3.9"
   },
   "scripts": {
