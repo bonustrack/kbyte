@@ -1,5 +1,3 @@
-// import objectHash from 'byteballcore/object_hash';
-
 let WebSocket;
 if (typeof window !== 'undefined') {
   WebSocket = window.WebSocket;
