@@ -18,18 +18,17 @@ const wait = (ws, cb) => {
 
 export default class Client {
   private readonly address: string;
-  private open: boolean;
-  private readonly queue: object;
-  private notifications: any;
   private readonly ws: any;
+  private readonly queue: object;
+  private open: boolean;
+  private notifications: any;
 
   constructor(address) {
     this.address = address;
-    this.open = false;
-    this.queue = {};
-    this.notifications = () => {};
-
     this.ws = new WebSocket(address);
+    this.queue = {};
+    this.open = false;
+    this.notifications = () => {};
 
     this.ws.addEventListener('message', (data) => {
       const message = JSON.parse(data.data);
