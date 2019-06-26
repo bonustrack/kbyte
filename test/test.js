@@ -3,7 +3,7 @@ const kbyte = require('..');
 const bluebird = require('bluebird');
 
 bluebird.promisifyAll(kbyte.Client.prototype);
-const client = new kbyte.Client('wss://obyte.org/bb');
+const client = new kbyte.Client('wss://byteball.org/bb');
 
 const test = async () => {
   /** Get witnesses */
@@ -92,8 +92,8 @@ const test = async () => {
   console.log('Asset metadata', assetMetadata);
 
   /** Subscribe to WebSocket notifications */
-  client.subscribe((err, result) => {
-    console.log('Subscribe', err, result);
+  client.subscribe(result => {
+    console.log('Subscribe', result);
   });
 
   /** New address to watch */
