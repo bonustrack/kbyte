@@ -15,10 +15,10 @@
     "eslint-plugin-import": "^2.18.0",
     "rollup": "^1.16.2",
     "rollup-plugin-filesize": "^6.1.1",
+    "rollup-plugin-terser": "^5.0.0",
     "rollup-plugin-typescript2": "^0.21.2",
-    "rollup-plugin-uglify": "^4.0.0",
-    "typescript": "^3.5.2",
-    "uglify-es": "^3.3.9"
+    "secp256k1": "^3.7.1",
+    "typescript": "^3.5.2"
   },
   "scripts": {
     "build": "rollup -c",

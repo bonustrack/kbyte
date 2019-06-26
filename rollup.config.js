@@ -1,6 +1,5 @@
 import typescript from 'rollup-plugin-typescript2';
-import { uglify } from 'rollup-plugin-uglify';
-import { minify } from 'uglify-es';
+import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';
 
@@ -14,7 +13,7 @@ export default [
     },
     plugins: [
       typescript({ clean: true }),
-      uglify({}, minify),
+      terser(),
       filesize(),
     ],
   },
