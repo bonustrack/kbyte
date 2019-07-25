@@ -1,6 +1,5 @@
-// const assert = require('assert');
-const kbyte = require('..');
 const bluebird = require('bluebird');
+const kbyte = require('..');
 
 bluebird.promisifyAll(kbyte.Client.prototype);
 const client = new kbyte.Client('wss://obyte.org/bb');
@@ -92,7 +91,7 @@ const test = async () => {
   console.log('Asset metadata', assetMetadata);
 
   /** Subscribe to WebSocket notifications */
-  client.subscribe(result => {
+  client.subscribe((result) => {
     console.log('Subscribe', result);
   });
 
