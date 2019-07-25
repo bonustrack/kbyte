@@ -1,6 +1,6 @@
 {
   "name": "kbyte",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A lightweight JavaScript library for Obyte",
   "main": "dist/kbyte.cjs.js",
   "module": "dist/kbyte.esm.js",
