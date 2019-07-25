@@ -10,13 +10,15 @@
   },
   "devDependencies": {
     "bluebird": "^3.5.5",
-    "eslint": "^6.0.1",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.18.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
     "rollup": "^1.16.2",
     "rollup-plugin-filesize": "^6.1.1",
-    "rollup-plugin-uglify": "^4.0.0",
-    "uglify-es": "^3.3.9"
+    "rollup-plugin-terser": "^5.0.0",
+    "rollup-plugin-typescript2": "^0.21.2",
+    "secp256k1": "^3.7.1",
+    "typescript": "^3.5.2"
   },
   "scripts": {
     "build": "rollup -c",

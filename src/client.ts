@@ -1,5 +1,6 @@
 let WebSocket;
 if (typeof window !== 'undefined') {
+  // @ts-ignore
   WebSocket = window.WebSocket;
 } else {
   WebSocket = require('ws');
@@ -16,13 +17,18 @@ const wait = (ws, cb) => {
 };
 
 export default class Client {
+  private readonly address: string;
+  private readonly ws: any;
+  private readonly queue: object;
+  private open: boolean;
+  private notifications: any;
+
   constructor(address) {
     this.address = address;
-    this.open = false;
-    this.queue = {};
-    this.notifications = () => {};
-
     this.ws = new WebSocket(address);
+    this.queue = {};
+    this.open = false;
+    this.notifications = () => {};
 
     this.ws.addEventListener('message', (data) => {
       const message = JSON.parse(data.data);
@@ -31,7 +37,7 @@ export default class Client {
         const result = error ? null : message[1].response;
         this.queue[message[1].tag](error, result);
       } else {
-        this.notifications(null, message);
+        this.notifications(message);
       }
     });
 
@@ -54,18 +60,15 @@ export default class Client {
     });
   }
 
-  request(command, params, cb) {
-    const request = { command };
-    if (params) request.params = params;
-    // request.tag = objectHash.getBase64Hash(request);
-    request.tag = Math.random().toString(36).substring(7);
+  request(command: string, params: any, cb?) {
+    const tag = Math.random().toString(36).substring(7);
+    const request = { command, params, tag };
     this.queue[request.tag] = cb;
     this.send(['request', request]);
   }
 
-  justsaying(subject, body) {
-    const justsaying = { subject };
-    if (body) justsaying.body = body;
+  justsaying(subject: string, body?: any) {
+    const justsaying = { subject, body };
     this.send(['justsaying', justsaying]);
   }
 }

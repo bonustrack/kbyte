@@ -11,7 +11,7 @@ kbyte was designed to work both in the browser and in Node.js.
 #### Node.js
 To install kbyte on Node.js, open your terminal and run:
 ```
-npm install kbyte --save
+npm install kbyte
 ```
 
 #### Browser
