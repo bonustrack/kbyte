@@ -2,7 +2,7 @@ const bluebird = require('bluebird');
 const kbyte = require('..');
 
 bluebird.promisifyAll(kbyte.Client.prototype);
-const client = new kbyte.Client('wss://obyte.org/bb');
+const client = new kbyte.Client('wss://obyte.org/bb'); // or wss://obyte.org/bb-test
 
 const test = async () => {
   /** Get witnesses */
@@ -43,7 +43,7 @@ const test = async () => {
   const subscribe = await client.requestAsync('subscribe', {
     subscription_id: '1',
     last_mci: mci,
-    library_version: '0.2.95',
+    library_version: '0.3.8',
   });
   console.log('Subscribe', subscribe);
 
@@ -89,6 +89,23 @@ const test = async () => {
   /** Get asset metadata */
   const assetMetadata = await client.requestAsync('hub/get_asset_metadata', '1OLPCz72F1rJ7IGtmEMuV1LvfLawT9WGOFuHugW2b7c=');
   console.log('Asset metadata', assetMetadata);
+
+  /** Dry run AA */
+  const aa = await client.requestAsync('light/dry_run_aa', {
+    address: 'TSDLQPZTSVDNC63G7YROC26CYCCZC4GO',
+    trigger: {
+      outputs: { base: 20000 },
+      data: { vest: true },
+      address: 'K237YYRMBYWCJBLSZGLJTXLZVVEXLI2Y',
+    },
+  });
+  console.log('Dry run AA', aa);
+
+  /** Get AA state vars */
+  const stateVars = await client.requestAsync('light/get_aa_state_vars', {
+    address: 'TSDLQPZTSVDNC63G7YROC26CYCCZC4GO',
+  });
+  console.log('State vars', stateVars);
 
   /** Subscribe to WebSocket notifications */
   client.subscribe((result) => {

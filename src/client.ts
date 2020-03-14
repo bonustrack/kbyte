@@ -20,15 +20,15 @@ export default class Client {
   private readonly address: string;
   private readonly ws: any;
   private readonly queue: object;
-  private open: boolean;
   private notifications: any;
+  private open: boolean;
 
   constructor(address) {
     this.address = address;
     this.ws = new WebSocket(address);
     this.queue = {};
+    this.notifications = [];
     this.open = false;
-    this.notifications = () => {};
 
     this.ws.addEventListener('message', (data) => {
       const message = JSON.parse(data.data);
@@ -37,7 +37,7 @@ export default class Client {
         const result = error ? null : message[1].response;
         this.queue[message[1].tag](error, result);
       } else {
-        this.notifications(message);
+        this.notifications.forEach(n => n(message));
       }
     });
 
@@ -51,7 +51,7 @@ export default class Client {
   }
 
   subscribe(cb) {
-    this.notifications = cb;
+    this.notifications.push(cb);
   }
 
   send(message) {
