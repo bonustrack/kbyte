@@ -32,7 +32,7 @@ client.request('get_peers', null, function(err, result) {
   console.log(err, result);
 });
 ```
-[See more examples](/test/test.js)
+[See more examples](/test/test.ts)
 
 ### Promises
 

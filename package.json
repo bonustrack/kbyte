@@ -1,6 +1,6 @@
 {
   "name": "kbyte",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A lightweight JavaScript library for Obyte",
   "main": "dist/kbyte.cjs.js",
   "module": "dist/kbyte.esm.js",
@@ -23,7 +23,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "node test/test.js",
+    "test": "node test/test.ts",
     "pretest": "npm run build"
   },
   "files": [
