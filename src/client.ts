@@ -1,12 +1,7 @@
-let WebSocket;
-if (typeof window !== 'undefined') {
-  // @ts-ignore
-  WebSocket = window.WebSocket;
-} else {
-  WebSocket = require('ws');
-}
+// @ts-ignore
+import WebSocket from 'ws';
 
-const wait = (ws, cb) => {
+const wait = (ws: WebSocket, cb) => {
   setTimeout(() => {
     if (ws.readyState === 1) {
       if (cb !== null) cb();
@@ -18,12 +13,12 @@ const wait = (ws, cb) => {
 
 export default class Client {
   private readonly address: string;
-  private readonly ws: any;
+  private readonly ws: WebSocket;
   private readonly queue: object;
   private notifications: any;
   private open: boolean;
 
-  constructor(address) {
+  constructor(address: string) {
     this.address = address;
     this.ws = new WebSocket(address);
     this.queue = {};
