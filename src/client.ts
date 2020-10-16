@@ -28,12 +28,6 @@ export default class Client {
     this.ws.addEventListener('message', (payload) => {
       const message = JSON.parse(payload.data);
       if (!message || !Array.isArray(message) || message.length !== 2) return;
-      if (message[0] === 'response' && message[1].tag && this.queue[message[1].tag]) {
-        if (message[1].command === 'heartbeat') {
-          delete this.queue[message[1].tag]; // cleanup
-          return;
-        }
-      }
       if (this.queue[message[1].tag]) {
         const error = message[1].response.error || null;
         const result = error ? null : message[1].response;
