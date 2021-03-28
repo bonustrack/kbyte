@@ -1,5 +1,10 @@
-// @ts-ignore
-import WebSocket from 'ws';
+let WebSocket;
+if (typeof window !== 'undefined') {
+  // @ts-ignore
+  WebSocket = window.WebSocket;
+} else {
+  WebSocket = require('ws');
+}
 
 const wait = (ws: WebSocket, cb) => {
   setTimeout(() => {

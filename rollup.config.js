@@ -8,11 +8,10 @@ const external = [...Object.keys(pkg.dependencies || {})];
 export default [
   {
     input: 'src/main.ts',
-    external,
     output: {
       name: pkg.name,
       file: pkg.browser,
-      format: 'iife',
+      format: 'umd',
       globals: {
         ws: 'WebSocket'
       }
