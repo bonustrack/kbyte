@@ -43,7 +43,7 @@ const test = async () => {
   const subscribe = await client.requestAsync('subscribe', {
     subscription_id: '1',
     last_mci: mci,
-    library_version: '0.3.8',
+    library_version: '0.3.12',
   });
   console.log('Subscribe', subscribe);
 
@@ -92,10 +92,10 @@ const test = async () => {
 
   /** Dry run AA */
   const aa = await client.requestAsync('light/dry_run_aa', {
-    address: 'TSDLQPZTSVDNC63G7YROC26CYCCZC4GO',
+    address: 'O6H6ZIFI57X3PLTYHOCVYPP5A553CYFQ',
     trigger: {
       outputs: { base: 20000 },
-      data: { vest: true },
+      data: { to: 'ULQA63NGEZACP4N7ZMBUBISH6ZTCUS2Q' },
       address: 'K237YYRMBYWCJBLSZGLJTXLZVVEXLI2Y',
     },
   });
@@ -103,7 +103,7 @@ const test = async () => {
 
   /** Get AA state vars */
   const stateVars = await client.requestAsync('light/get_aa_state_vars', {
-    address: 'TSDLQPZTSVDNC63G7YROC26CYCCZC4GO',
+    address: 'O6H6ZIFI57X3PLTYHOCVYPP5A553CYFQ',
   });
   console.log('State vars', stateVars);
 

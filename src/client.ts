@@ -30,12 +30,15 @@ export default class Client {
     this.notifications = [];
     this.open = false;
 
-    this.ws.addEventListener('message', (data) => {
-      const message = JSON.parse(data.data);
+    this.ws.addEventListener('message', (payload) => {
+      const message = JSON.parse(payload.data);
+      if (!message || !Array.isArray(message) || message.length !== 2) return;
       if (this.queue[message[1].tag]) {
         const error = message[1].response.error || null;
         const result = error ? null : message[1].response;
-        this.queue[message[1].tag](error, result);
+        const callback = this.queue[message[1].tag];
+        delete this.queue[message[1].tag]; // cleanup
+        callback(error, result);
       } else {
         this.notifications.forEach(n => n(message));
       }
@@ -65,6 +68,16 @@ export default class Client {
     const request = { command, params, tag };
     this.queue[request.tag] = cb;
     this.send(['request', request]);
+  }
+
+  respond(command: string, tag: string, message?) {
+    const respond = { command, tag };
+    if (typeof message !== 'undefined') respond['response'] = message;
+    this.send(['response', respond]);
+  }
+
+  error(command: string, tag: string, message: string) {
+    this.respond(command, tag, { error: message });
   }
 
   justsaying(subject: string, body?: any) {
