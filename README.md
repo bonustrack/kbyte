@@ -55,6 +55,6 @@ client.requestAsync('get_peers', null).then(function(result) {
 });
 ```
 
-## License
+### License
 
 [MIT](LICENSE).
